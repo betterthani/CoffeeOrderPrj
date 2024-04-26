@@ -25,7 +25,7 @@
 	
 	<context:component-scan base-package="com.example.myapp.coffee.controller"/>
 	<context:component-scan base-package="com.example.myapp.customer.controller"/>
-	<context:component-scan base-package="com.example.myapp.order.controller"/>
+	<context:component-scan base-package="com.example.myapp.buy.controller"/>
 	<context:component-scan base-package="com.example.myapp.review.controller"/>
 	
 	<view-controller path="/file" view-name="file/index"/>

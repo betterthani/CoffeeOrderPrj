@@ -31,8 +31,8 @@
 	<context:component-scan base-package="com.example.myapp.review.dao"/>
 	<context:component-scan base-package="com.example.myapp.customer.service"/>
 	<context:component-scan base-package="com.example.myapp.customer.dao"/>
-	<context:component-scan base-package="com.example.myapp.order.service"/>
-	<context:component-scan base-package="com.example.myapp.order.dao"/>
+	<context:component-scan base-package="com.example.myapp.buy.service"/>
+	<context:component-scan base-package="com.example.myapp.buy.dao"/>
 	
 	<!-- 트랜잭션매니저 -->
 	<bean id="transactionManager" 
