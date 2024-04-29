@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.myapp.coffee.dao.ICoffeeRepository">
+
+	<select id="getCoffeeList" resultType="hashmap">
+		SELECT
+			COFFEE_ID
+			, COFFEE_NAME
+			, KCAL_INFO
+			, COFFEE_IMAGE
+			, AMOUNT
+			, CATEGORY
+			, ICE_HOT
+		FROM coffee
+	</select>
+	
+	<update id="updateCoffeeInfo" parameterType="com.example.myapp.coffee.model.Coffee">
+		UPDATE coffee 
+		SET
+			COFFEE_ID = coffee_seq.NEXTVAL
+			, COFFEE_NAME = #{coffeeName}
+			, KCAL_INFO = #{kaclInfo}
+			, COFFEE_IMAGE = #{coffeeImage}
+			, AMOUNT = #{amount}
+			, CATEGORY = #{category}
+			, ICE_HOT = #{iceHot}
+	</update>
+	
+	<select id="getCoffeeById" parameterType="int" resultType="com.example.myapp.coffee.model.Coffee">
+		SELECT
+			COFFEE_ID
+			, COFFEE_NAME
+			, KCAL_INFO
+			, COFFEE_IMAGE
+			, AMOUNT
+			, CATEGORY
+			, ICE_HOT
+		FROM
+			coffee
+		WHERE id = #{coffeeId}
+	</select>
+	
+	<delete id="deleteFile" parameterType="int">
+		DELETE
+		FROM coffee
+		WHERE COFFEE_ID = #{coffeeId}
+	</delete>
+
+</mapper>

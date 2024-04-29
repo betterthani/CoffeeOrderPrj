@@ -1,5 +1,18 @@
 package com.example.myapp.customer.model;
 
-public class Customer {
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+public class Customer {
+	
+	private int custId;
+	private String role;
+	private String name;
+	private String employeeNumber;
+	private String password;
+	private byte[] likeMenu;
+	private int point;
+	
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.myapp.buy.dao.IBuyRepository">
+	<insert id="insertBuy" parameterType="com.example.myapp.buy.model.Buy">
+		INSERT INTO buy
+		(
+			BUY_ID
+			, COFFEE_ID
+			, CUSTOMER_ID
+			, BUY_TIME
+			, BUY_COUNT
+			, BUY_MENU
+			, ADD_SHOT
+		)
+		VALUES
+		(
+			buy_seq.NEXTVAL
+			, #{coffeeId}
+			, #{customerId}
+			, SYSDATE
+			, #{buyCount}
+			, #{buyMenu}
+			, #{addShot}
+		)
+	</insert>
+
+</mapper>

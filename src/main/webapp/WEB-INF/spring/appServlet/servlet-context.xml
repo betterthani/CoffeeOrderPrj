@@ -34,6 +34,17 @@
 		<beans:property name="maxUploadSize" value="50000000"/>
 	</beans:bean>
 	
+	<beans:bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<beans:property name="exceptionMappings">
+			<beans:props>
+				<beans:prop key="java.lang.RuntimeException">
+					error/runtime
+				</beans:prop>
+			</beans:props>
+		</beans:property>
+		<beans:property name="defaultErrorView" value="error/default"/>
+	</beans:bean>
+	
 	
 	
 </beans:beans>

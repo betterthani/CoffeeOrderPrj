@@ -43,8 +43,11 @@
 	<!-- 어노테이션을 이용한 트랜잭션 설정 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
+	<mybatis-spring:scan base-package="com.example.myapp.buy.dao"/>
 	<mybatis-spring:scan base-package="com.example.myapp.coffee.dao"/>
+	<mybatis-spring:scan base-package="com.example.myapp.customer.dao"/>
 	<mybatis-spring:scan base-package="com.example.myapp.review.dao"/>
+	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
 		<property name="mapperLocations" value="classpath:mapper/**/*.xml" />
