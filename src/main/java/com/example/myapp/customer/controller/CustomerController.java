@@ -40,14 +40,22 @@ public class CustomerController {
 	}
 	
 	/**
+	 * 메인 화면
+	 */
+	@GetMapping("/coffee")
+	public String getMainPage() {
+		return "home";
+	}
+	
+/*	*//**
 	 * 로그인 화면 
 	 * @return
-	 */
+	 *//*
 	@GetMapping("/coffee/login")
 	public String getLogin() {
 		return "home";
 	}
-	
+*/	
 	/**
 	 * 로그인
 	 * @param employeeNumber
@@ -62,29 +70,36 @@ public class CustomerController {
 							, RedirectAttributes redirectAttr) {
 		if(employeeNumber == null || employeeNumber == "") {
 			// 사원번호(로그인id)가 없을 경우
+			logger.info(">>> id 없음");
 			return "coffee/login";
 		} else {
 			// 사원번호가 있을 경우
 			// 비밀번호 조회
 			Customer custInfo = customerService.getCustomer(employeeNumber, password);
+			logger.info(">>>조회 시작" + custInfo);
 			if(custInfo != null) {
 				// 조회한 비밀번호가 있을 경우
-				if(custInfo.equals(password)) {
+				logger.info(">>> 비밀번호 있음");
+				logger.info(">>> 비밀번호 " + custInfo.getPassword());
+				if(custInfo.getPassword().equals(password)) {
 					// 비밀번호 맞을 경우 
 					// 세션 정보에 저장
+					logger.info(">>> 비밀번호 맞음");
 					session.setAttribute("custId", custInfo.getCustId()); //pk
 					session.setAttribute("role", custInfo.getRole()); // 관리자여부
 					session.setAttribute("employeeNumber", employeeNumber);//사원번호(로그인id)
-					return "coffee/mainPage";
+					return "coffee/list";
 				} else {
 					// 비밀번호 맞지 않을 경우
+					logger.info(">>>> 비밀번호 안 맞음");
 					redirectAttr.addFlashAttribute("message", "비밀번호가 맞지 않습니다.");
-					return "redirect:/coffee/login";
+					return "/coffee";
 				}
 			} else {
 				// 조회한 비밀번호가 없을 경우
+				logger.info(">>>> 비밀번호 없음");
 				redirectAttr.addFlashAttribute("message", "입력하신 비밀번호가 없습니다.");
-				return "redirect:/coffee/login";
+				return "/coffee";
 			}
 		}
 	} //-> 로그인 메서드 종료

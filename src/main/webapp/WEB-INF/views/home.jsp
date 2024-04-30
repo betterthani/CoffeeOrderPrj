@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <base href="\" \>
+    <base href="\" >
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -88,20 +88,13 @@
                         <!-- To make this form functional, sign up at-->
                         <!-- https://startbootstrap.com/solution/contact-forms-->
                         <!-- to get an API token!-->
-                        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                        <form id="contactForm" data-sb-form-api-token="API_TOKEN" action="/coffee/list" method="post">
                             <!-- Name input-->
                             <div class="form-floating mb-3">
                                 <input class="form-control"  name="employeeNumber" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
                                 <label for="name">ID </label>
                                 <div class="invalid-feedback" data-sb-feedback="name:required">사원 번호를 입력해주세요</div>
                             </div>
-                            <!--이메일 입력창 Email address input-->
-                            <!-- <div class="form-floating mb-3">
-                                <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
-                                <label for="email">Email address</label>
-                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
-                            </div> -->
                             <!-- Password input-->
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="password" id="password" type="password" data-sb-validations="required" />
@@ -127,7 +120,8 @@
                             <!-- an error submitting the form-->
                             <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
                             <!-- 로그인 버튼 Button-->
-                            <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">login</button>
+                            <input type="submit" class="btn btn-primary btn-xl" value="login">
+                            <!-- <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">login</button> -->
                         </form>
                     </div>
                 </div>
