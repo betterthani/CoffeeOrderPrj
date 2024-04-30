@@ -1,6 +1,8 @@
 package com.example.myapp.coffee.controller;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -73,16 +75,33 @@ public class CoffeeController {
 		String role = (String) session.getAttribute("role");
 		if (role.equals("ROLE_ADMIN")) {
 			// 관리자일 경우 update가능
-			boolean isUpdateCoffee = coffeeService.updateCoffeeInfo(coffee, file);
+			// 기존 파일 삭제
+			coffeeService.deleteFile(coffee.getCoffeeId());
+			
 			try {
-				if (isUpdateCoffee) {
-					// update 성공
-					return "coffee/list";
-				} else {
-					// update 실패
-					redirectAttr.addFlashAttribute("message", "업데이트에 실패했습니다.");
+				if(file != null && !file.isEmpty()) {
+					String fileName = file.getOriginalFilename();
+					String fileExt = fileName.substring(fileName.lastIndexOf("."));
+					UUID uuid = UUID.randomUUID();
+					String uuidFileName = uuid + fileExt;
+
+					logger.info(">>>>업데이트할 파일 본명: " + file.getOriginalFilename());
+					String uploadDir = session.getServletContext().getRealPath("/upload");
+					logger.info(">>>>저장 될 경로 : " + uploadDir);
+
+					File saveFilePath = new File(uploadDir, uuidFileName); // 해당 경로에 따른 파일 객체 생성됨.
+					file.transferTo(saveFilePath); // 파일에 저장
+
+					Coffee newCoffee = new Coffee();
+					newCoffee.setCoffeeName(coffee.getCoffeeName());
+					newCoffee.setKaclInfo(coffee.getKaclInfo());
+					newCoffee.setCoffeeImage(uploadDir + uuidFileName);
+					newCoffee.setAmount(coffee.getAmount());
+					newCoffee.setCategory(coffee.getCategory());
+					newCoffee.setIceHot(coffee.getIceHot());
+					coffeeService.updateCoffeeInfo(newCoffee);
 				}
-			} catch (RuntimeException e) {
+			} catch (Exception e) {
 				redirectAttr.addFlashAttribute("message", e.getMessage());
 			}
 		} else {

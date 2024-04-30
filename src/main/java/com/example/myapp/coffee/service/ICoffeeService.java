@@ -9,9 +9,9 @@ import com.example.myapp.coffee.model.Coffee;
 public interface ICoffeeService {
 	
 	public List<Coffee> getCoffeeList();
-	public boolean updateCoffeeInfo(Coffee coffee, MultipartFile file);
+	public boolean updateCoffeeInfo(Coffee coffee);
 	public Coffee getCoffeeById(int coffeeId);
-	public boolean deleteFile(int coffeeId);
+	public void deleteFile(int coffeeId);
 	
 	//민서 - 커피 상세 정보
 	public Coffee getCoffeeInfoDetail(int coffeeId);

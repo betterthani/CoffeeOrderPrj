@@ -31,47 +31,14 @@ public class CoffeeService implements ICoffeeService {
 	// 커피 정보 수정
 	@Override
 	@Transactional
-	public boolean updateCoffeeInfo(Coffee coffee, MultipartFile file) {
-
-		// 기존 파일 삭제
-		boolean isDelete = deleteFile(coffee.getCoffeeId());
-		if (isDelete) {
-			// 파일 삭제 완료시 파일 입력
-			logger.info(">>>파일 이름 : " + file.getOriginalFilename());
-			try {
-				if (file != null && !file.isEmpty()) {
-					String fileName = file.getOriginalFilename();
-					String fileExt = fileName.substring(fileName.lastIndexOf("."));
-					UUID uuid = UUID.randomUUID();
-					String uuidFileName = uuid + fileExt;
-
-					File saveFilePath = new File("C:\\dev\\coffeeUpload", uuidFileName); // 해당 경로에 따른 파일 객체 생성됨.
-					file.transferTo(saveFilePath); // 파일에 저장
-
-					Coffee newCoffee = new Coffee();
-					newCoffee.setCoffeeName(coffee.getCoffeeName());
-					newCoffee.setKaclInfo(coffee.getKaclInfo());
-					newCoffee.setCoffeeImage("C:\\dev\\upload\\" + uuidFileName);
-					newCoffee.setAmount(coffee.getAmount());
-					newCoffee.setCategory(coffee.getCategory());
-					newCoffee.setIceHot(coffee.getIceHot());
-					coffeeRepository.updateCoffeeInfo(newCoffee);
-					return true;
-				}
-			} catch (Exception e) {
-				logger.info(e.getMessage());
-			}
-		} else {
-			// 기존 파일 삭제가 안 됨
-			logger.info(">>> 사진 파일 삭제 안 되어 파일 수정 불가");
-		}
-		return false;
+	public boolean updateCoffeeInfo(Coffee coffee) {
+		return coffeeRepository.updateCoffeeInfo(coffee);
 	}
 	
 	// 커피정보 파일 삭제
 	@Override
 	@Transactional
-	public boolean deleteFile(int coffeeId) {
+	public void deleteFile(int coffeeId) {
 		// 해당 커피 정보 찾기
 		Coffee coffeeInfo = coffeeRepository.getCoffeeById(coffeeId);
 		
@@ -80,11 +47,6 @@ public class CoffeeService implements ICoffeeService {
 		logger.info(">>>> 기존 파일 경로 : " + uuidFileName);
 		File file = new File(uuidFileName);
 		boolean isDeleted = file.delete();
-		if(isDeleted) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	// 커피 정보 조회
