@@ -40,10 +40,47 @@
 		WHERE id = #{coffeeId}
 	</select>
 	
-	<delete id="deleteFile" parameterType="int">
-		DELETE
-		FROM coffee
+	<select id="getCoffeeInfoDetail" parameterType="int" resultType="com.example.myapp.coffee.model.Coffee">
+      select 
+      		COFFEE_ID
+            , COFFEE_NAME
+            , KCAL_INFO
+            , COFFEE_IMAGE
+            , AMOUNT
+            , CATEGORY
+            , ICE_HOT 
+       from coffee 
+       where 
+       		coffee_id = #{coffeeId}
+   </select>
+   
+   <insert id="insertCoffeeInfo" parameterType="com.example.myapp.coffee.model.Coffee">
+		INSERT INTO coffee 
+			(	
+				COFFEE_ID
+				, COFFEE_NAME
+				, KCAL_INFO
+				, COFFEE_IMAGE
+				, AMOUNT
+				, CATEGORY
+				, ICE_HOT
+			)
+		VALUES 
+			(
+				coffee_seq.NEXTVAL
+				, #{coffeeName}
+				, #{kaclInfo}
+				, #{coffeeImage}
+				, #{amount}
+				, #{category}
+				, #{iceHot}
+			)
+   </insert>
+   
+   <delete id="deleteCoffeeId" parameterType="int">
+		DELETE FROM coffee
 		WHERE COFFEE_ID = #{coffeeId}
 	</delete>
+	
 
 </mapper>

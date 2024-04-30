@@ -16,6 +16,29 @@
 			employee_number = #{employeeNumber}
 			AND password = #{password}
 	</select>
+	
+	<insert id="signUpCustomer" parameterType="com.example.myapp.customer.model.Customer">
+		INSERT INTO customer 
+			(
+				CUSTOMER_ID
+				, ROLE
+				, NAME
+				, EMPLOYEE_NUMBER
+				, PASSWORD
+				, LIKE_MENU
+				, POINT
+			)
+		VALUES 
+			(	
+				 customer_seq.NEXTVAL
+				, 'ROLE_USER'
+				, #{name}
+				, #{employeeNumber}
+				, #{password}
+				, #{likeMenu}
+				, #{point}
+			)
+	</insert>
 
 
 </mapper>

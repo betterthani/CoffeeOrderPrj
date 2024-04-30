@@ -13,4 +13,13 @@ public interface ICoffeeService {
 	public Coffee getCoffeeById(int coffeeId);
 	public boolean deleteFile(int coffeeId);
 	
+	//민서 - 커피 상세 정보
+	public Coffee getCoffeeInfoDetail(int coffeeId);
+	
+	// 병훈 - 커피 정보 입력
+    public boolean insertNewCoffeeInfo(Coffee coffee, MultipartFile file);
+    // 병훈 - 커피 정보 삭제
+    public boolean deleteCoffeeInfo(int coffeeId);
+
+	
 }

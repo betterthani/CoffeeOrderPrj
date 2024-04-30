@@ -23,5 +23,17 @@
 			, #{addShot}
 		)
 	</insert>
+	
+	<select id="getBuyList" resultType="com.example.myapp.buy.model.Buy"> 
+		SELECT 
+			BUY_ID
+			, COFFEE_ID
+			, CUSTOMER_ID
+			, BUY_TIME
+			, BUY_COUNT
+			, BUY_MENU
+			, ADD_SHOT
+		FROM buy 
+	</select>
 
 </mapper>
