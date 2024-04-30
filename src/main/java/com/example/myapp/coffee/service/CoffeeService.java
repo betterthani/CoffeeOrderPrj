@@ -97,33 +97,15 @@ public class CoffeeService implements ICoffeeService {
 		return false;
 	}
 
-	// 병훈 - 커피 정보 삭제
 	@Override
-	@Transactional
 	public boolean deleteCoffeeInfo(int coffeeId) {
-		try {
-			
-            // 주어진 ID에 해당하는 커피가 있는지 확인
-            Coffee deleteCoffeeInfo = coffeeRepository.getCoffeeById(coffeeId);
-            if (deleteCoffeeInfo == null) {
-                logger.error(coffeeId + " 번 커피는 존재하지 않습니다.");
-                return false;
-            }
-
-            // 폴더에 적재되어있는 파일 삭제 안 할 건지?
-            // 데이터베이스에서 커피 정보 삭제
-            coffeeRepository.deleteCoffeeId(coffeeId);
-            logger.info(coffeeId + " 번 커피가 성공적으로 삭제되었습니다.");
-            return true;
-            
-        } catch (Exception e) {
-        	logger.info("에러메세지 : " + e.getMessage());
-        } finally {
-            logger.info("커피 정보 삭제 실패");
-        }
-        return false;
+		// TODO Auto-generated method stub
+		return false;
 	}
+	
 
+	
+	
 	
 
 }
