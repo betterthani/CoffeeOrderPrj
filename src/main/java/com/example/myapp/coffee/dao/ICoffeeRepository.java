@@ -18,9 +18,10 @@ public interface ICoffeeRepository {
 	public Coffee getCoffeeInfoDetail(int coffeeId);
 	
 	// 병훈 - 커피 정보 입력
-	public boolean insertCoffeeInfo(Coffee coffee);
+	public boolean insertNewCoffeeInfo(Coffee coffee);
 
 	// 병훈 - 커피 정보 삭제
-	public boolean deleteCoffeeId(int coffeeId);
+	public void deleteCoffeeInfo(int coffeeId);
+
 
 }

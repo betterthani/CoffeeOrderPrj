@@ -12,7 +12,6 @@ public class Customer {
 	private String name;
 	private String employeeNumber;
 	private String password;
-	private byte[] likeMenu;
 	private int point;
 	
 }

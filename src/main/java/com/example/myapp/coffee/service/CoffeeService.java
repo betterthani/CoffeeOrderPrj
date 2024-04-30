@@ -62,46 +62,20 @@ public class CoffeeService implements ICoffeeService {
 	}
 
 	// 병훈 - 커피 정보 입력
-	@Override
-	@Transactional
-	public boolean insertNewCoffeeInfo(Coffee coffee, MultipartFile file) {
-		try {
-			if (file != null && !file.isEmpty()) {
-				String fileName = file.getOriginalFilename();
-				String fileExt = fileName.substring(fileName.lastIndexOf("."));
-				UUID uuid = UUID.randomUUID();
-				String uuidFileName = uuid + fileExt;
+    @Override
+    @Transactional
+    public boolean insertNewCoffeeInfo(Coffee coffee) {
+        return coffeeRepository.insertNewCoffeeInfo(coffee);
+    }
 
-				// 파일 저장 경로 설정
-				String uploadDir = "C://dev//coffeeUpload";
-				File saveFilePath = new File(uploadDir, uuidFileName);
-				file.transferTo(saveFilePath);
+    // 병훈- 커피 정보 삭제
+    @Override
+    @Transactional
+    public void deleteCoffeeInfo(int coffeeId) {
+        coffeeRepository.deleteCoffeeInfo(coffeeId);
+    }
 
-				// 커피 정보 저장
-				Coffee newCoffee = new Coffee();
-				newCoffee.setCoffeeName(coffee.getCoffeeName());
-				newCoffee.setKaclInfo(coffee.getKaclInfo());
-				newCoffee.setCoffeeImage(uploadDir + "//" + uuidFileName);
-				newCoffee.setAmount(coffee.getAmount());
-				newCoffee.setCategory(coffee.getCategory());
-				newCoffee.setIceHot(coffee.getIceHot());
-				coffeeRepository.insertCoffeeInfo(newCoffee);
 
-				return true;
-			} else {
-				logger.info("업로드된 파일이 없습니다.");
-			}
-		} catch (Exception e) {
-			logger.info("잘못된 정보 입력입니다.: " + e.getMessage());
-		}
-		return false;
-	}
-
-	@Override
-	public boolean deleteCoffeeInfo(int coffeeId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 
 	

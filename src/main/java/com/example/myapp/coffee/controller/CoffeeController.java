@@ -152,15 +152,36 @@ public class CoffeeController {
 		if (role != null && role.equals("ROLE_ADMIN")) {
 			// 관리자인 경우에만 추가 가능
 			try {
-				boolean isCoffeeAdded = coffeeService.insertNewCoffeeInfo(coffee, file);
-				if (isCoffeeAdded) {
-					// 추가 성공
-					redirectAttr.addFlashAttribute("message", "커피 정보 추가 되었습니다.");
+				if (file != null && !file.isEmpty()) {
+					String fileName = file.getOriginalFilename();
+					String fileExt = fileName.substring(fileName.lastIndexOf("."));
+					UUID uuid = UUID.randomUUID();
+					String uuidFileName = uuid + fileExt;
+
+					// 파일 저장 경로 설정
+					String uploadDir = session.getServletContext().getRealPath("/upload");
+					logger.info("upload dir : " + uploadDir);
+					File saveFilePath = new File(uploadDir, uuidFileName);
+					file.transferTo(saveFilePath);
+
+					// 커피 정보 저장
+					Coffee newCoffee = new Coffee();
+					newCoffee.setCoffeeName(coffee.getCoffeeName());
+					newCoffee.setKaclInfo(coffee.getKaclInfo());
+					newCoffee.setCoffeeImage(uploadDir + uuidFileName);
+					newCoffee.setAmount(coffee.getAmount());
+					newCoffee.setCategory(coffee.getCategory());
+					newCoffee.setIceHot(coffee.getIceHot());
+					boolean coffeeinsert = coffeeService.insertNewCoffeeInfo(newCoffee);
+					if (coffeeinsert) {
+						redirectAttr.addFlashAttribute("message", "커피 정보 추가 되었습니다.");
+					} else {
+						redirectAttr.addFlashAttribute("message", "커피 정보 추가에 실패했습니다.");
+					}
 				} else {
-					// 추가 실패
-					redirectAttr.addFlashAttribute("message", "커피 정보 추가에 실패했습니다.");
+					logger.info("업로드된 파일이 없습니다.");
 				}
-			} catch (RuntimeException e) {
+			} catch (Exception e) {
 				redirectAttr.addFlashAttribute("message", e.getMessage());
 			}
 		} else {
@@ -187,14 +208,12 @@ public class CoffeeController {
 		if (role != null && role.equals("ROLE_ADMIN")) {
 			// 관리자인 경우에만 삭제 가능
 			try {
-				boolean isCoffeeDeleted = coffeeService.deleteCoffeeInfo(coffeeId);
-				if (isCoffeeDeleted) {
-					// 삭제 성공
-					return "redirect:/coffee/list";
-				} else {
-					// 삭제 실패
-					redirectAttr.addFlashAttribute("message", "커피 정보 삭제에 실패했습니다.");
-				}
+				// 파일 삭제
+				coffeeService.deleteFile(coffeeId);
+
+				// 커피 정보 삭제
+				coffeeService.deleteCoffeeInfo(coffeeId);
+
 			} catch (RuntimeException e) {
 				redirectAttr.addFlashAttribute("message", e.getMessage());
 			}
@@ -204,6 +223,7 @@ public class CoffeeController {
 		}
 		return "redirect:/coffee/list";
 	}
+
 
 	
 	

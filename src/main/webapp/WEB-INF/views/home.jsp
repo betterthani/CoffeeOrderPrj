@@ -33,7 +33,7 @@
         <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container">
                 <!-- <a class="navbar-brand" href="#page-top">Coffee Saltux</a> -->
-                <img class="navbar-brand" src="assets/img/portfolio/5_logo_long.png" alt="..."  width="250" />
+                <img class="navbar-brand" src="assets/img/portfolio/5_logo_long_white.png" alt="..."  width="250" />
 
 
                 <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +88,7 @@
                         <!-- To make this form functional, sign up at-->
                         <!-- https://startbootstrap.com/solution/contact-forms-->
                         <!-- to get an API token!-->
-                        <form id="contactForm" data-sb-form-api-token="API_TOKEN" action="/coffee/list" method="post">
+                        <form id="contactForm" data-sb-form-api-token="API_TOKEN" action="/coffee/login" method="post">
                             <!-- Name input-->
                             <div class="form-floating mb-3">
                                 <input class="form-control"  name="employeeNumber" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
@@ -121,6 +121,7 @@
                             <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
                             <!-- 로그인 버튼 Button-->
                             <input type="submit" class="btn btn-primary btn-xl" value="login">
+                            <a href="/coffee/signup"><input type="button" class="btn btn-primary btn-xl" value="create account"></a>
                             <!-- <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">login</button> -->
                         </form>
                     </div>

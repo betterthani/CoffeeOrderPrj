@@ -54,7 +54,7 @@
        		coffee_id = #{coffeeId}
    </select>
    
-   <insert id="insertCoffeeInfo" parameterType="com.example.myapp.coffee.model.Coffee">
+   <insert id="insertNewCoffeeInfo" parameterType="com.example.myapp.coffee.model.Coffee">
 		INSERT INTO coffee 
 			(	
 				COFFEE_ID
@@ -76,11 +76,13 @@
 				, #{iceHot}
 			)
    </insert>
+
    
-   <delete id="deleteCoffeeId" parameterType="int">
+   <delete id="deleteCoffeeInfo" parameterType="int">
 		DELETE FROM coffee
 		WHERE COFFEE_ID = #{coffeeId}
 	</delete>
+
 	
 
 </mapper>

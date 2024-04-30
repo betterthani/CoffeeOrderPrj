@@ -9,7 +9,6 @@
 			, NAME
 			, EMPLOYEE_NUMBER
 			, PASSWORD
-			, LIKE_MENU
 			, POINT
 		FROM customer
 		WHERE 
@@ -25,18 +24,16 @@
 				, NAME
 				, EMPLOYEE_NUMBER
 				, PASSWORD
-				, LIKE_MENU
 				, POINT
 			)
 		VALUES 
 			(	
-				 customer_seq.NEXTVAL
+				 CUSTOMER_SEQ.NEXTVAL
 				, 'ROLE_USER'
 				, #{name}
 				, #{employeeNumber}
 				, #{password}
-				, #{likeMenu}
-				, #{point}
+				, '100000'
 			)
 	</insert>
 
