@@ -54,35 +54,6 @@ public class CoffeeService implements ICoffeeService {
 	public Coffee getCoffeeById(int coffeeId) {
 		return coffeeRepository.getCoffeeById(coffeeId);
 	}
-
-	// 기존 커피 이미지 삭제
-	/*@Override
-	@Transactional
-	public boolean deleteFile(int coffeeId) {
-		String uploadDir = "C:\\dev\\coffeeUpload";
-		String uuidFileName = getCoffeeById(coffeeId).getCoffeeImage();
-		logger.info(">>>CoffeeService_deleteFile, 기존 파일명 이름 : " + uuidFileName);
-
-		if (uuidFileName != null) {
-			// 기존 정보가 있을 경우 삭제
-			File deletedFile = new File(uploadDir, uuidFileName);
-			boolean isDeleted = deletedFile.delete();
-
-			if (isDeleted) {
-				// 파일 삭제 완료
-				//coffeeRepository.deleteFile(coffeeId);
-				logger.info(">>>파일 삭제 완료");
-				return true;
-
-			} else {
-				logger.info(">>>파일 삭제 실패");
-				throw new RuntimeException("file not deleted");
-			}
-		} else {
-			logger.info(">>>기존의 파일이 없습니다.");
-			return false;
-		}
-	}*/
 	
 	// 민서_커피 정보 
 	@Override
