@@ -35,7 +35,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio"><i class="fas fa-coffee"></i>메뉴</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded " href="#contact"><i class="fas fa-shopping-cart fa-fw"></i>주문</a></li>
+	                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded " href="/coffee/orderList?custId=${custId}"><i class="fas fa-shopping-cart fa-fw"></i>주문</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about"><i class="fas fa-xmark"></i>로그아웃</a></li>
                     </ul>
                 </div>
@@ -43,8 +43,6 @@
         </nav>
         
         <!-- Coffee menu Section-->
-
-
         <section class="page-section portfolio" id="portfolio">
             <div class="container">
                 <!-- Portfolio Section Heading-->
@@ -57,32 +55,28 @@
                 </div>
                 <!-- Portfolio Grid Items-->
                 <div class="row justify-content-center">
-                    <!-- Portfolio Item 1-->
+                
+                	<!-- <div id="menulist"></div> -->
+                	
+                    <!-- Portfolio Item 1-->            
+                    <c:forEach var="coffee" items="${coffeeList}">
 	                    <div class="col-md-6 col-lg-4 mb-5">
-	                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
+	                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal${coffee.COFFEE_ID}">
 	                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
 	                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-	                            </div>
-                    			<c:forEach var="coffee" items="${coffeeList}">
-		                            	<img class="img-fluid" src="${coffee.COFFEE_IMAGE}" />
-                    			</c:forEach>
+	                           </div>
+	                           <img class="img-fluid" src="${coffee.COFFEE_IMAGE}" />
 	                        </div>
 	                    </div>
-                    <!-- Portfolio Item 2-->
-                    <div class="col-md-6 col-lg-4 mb-5">
-                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
-                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                            </div>
-                            <img class="img-fluid" src="assets/img/coffee/Blueberry.jpg" alt="..." />
-                        </div>
-                    </div> 
+                    </c:forEach>
                 </div>
             </div>
+            
         </section>
         <!-------------------------------------------------- 메뉴 상세 설명 및 주문---------------------------------------------------->
         <!-- Portfolio Modal 1-->
-        <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1" aria-hidden="true">
+        <c:forEach var="coffee" items="${coffeeList}">
+        <div class="portfolio-modal modal fade" id="portfolioModal${coffee.COFFEE_ID}" tabindex="-1" aria-labelledby="portfolioModal${coffee.COFFEE_ID}" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
@@ -91,7 +85,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Americano</h2>
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">${coffee.COFFEE_NAME}</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -99,12 +93,36 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="assets/img/coffee/Americano.jpg" alt="..." width="400"/>
+                                    <div>
+                                    	<img class="img-fluid rounded mb-5" src="${coffee.COFFEE_IMAGE}" alt="..." width="400"/>
+                                    </div>
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                    <button class="btn btn-primary" data-bs-dismiss="modal">
-                                        <i class="fas fa-shopping-cart fa-fw"></i>
-                                        주문하기
+                                    
+                                    <h5 class="text-uppercase mb-3"  style="display:inline;">Category: </h5>
+                                    <p style="display:inline; font-size: 22px;" >${coffee.CATEGORY}</p>
+                                    
+                                    <h5 class="text-uppercase mb-1">kcal: ${coffee.KCAL_INFO}</h5>
+                                    
+                                    <h5 class="text-uppercase mb-4"style="display:inline;" >menu_price: </h5>
+                                    <p class="mb-4"  style="display:inline; font-size: 22px; ">${coffee.AMOUNT} 원</p>
+                                    <br>
+                                    
+                                    <div class="d-flex justify-content-center">
+	                                    <form action="/coffee/buy/a?coffeeId=${coffee.COFFEE_ID}&custId=${custId}" method="post">
+		                                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="${coffee.COFFEE_ID}">
+	                                    </form>
+	                                        <i class="fas fa-shopping-cart fa-fw"></i>
+	                                        	주문하기
+	                                    <c:if test="${role eq 'ROLE_ADMIN'}">
+		                                    <form action="/coffee/info/c?coffeeId=${coffee.COFFEE_ID}" method="post">
+			                                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="${coffee.COFFEE_ID}">
+		                                    </form>
+		                                        <i class="fas fa-shopping-cart fa-fw"></i>
+		                                        	삭제하기
+	                                    </c:if>
+                                    </div>
+                                       	
+                                     
                                     </button>
                                 </div>
                             </div>
@@ -113,214 +131,23 @@
                 </div>
             </div>
         </div>
-        <!-- Portfolio Modal 2-->
-        <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal2" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                    <div class="modal-body text-center pb-5">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Blueberry</h2>
-                                    <!-- Icon Divider-->
-                                    <div class="divider-custom">
-                                        <div class="divider-custom-line"></div>
-                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                        <div class="divider-custom-line"></div>
-                                    </div>
-                                    <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="assets/img/coffee/Blueberry.jpg" alt="..." />
-                                    <!-- Portfolio Modal - Text-->
-                                    <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                    <button class="btn btn-primary" data-bs-dismiss="modal">
-                                        <i class="fas fa-xmark fa-fw"></i>
-                                        Close Window
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </c:forEach>
 
-
-
-        <button class="btn btn-primary btn-xl " id="deleteButton" type="submit" style="float: right;">delete menu</button>
-        <!-- <button class="btn btn-primary btn-xl " id="addButton" type="submit" style="float: right;">add menu</button> -->
-
+		<c:if test="${role eq 'ROLE_ADMIN'}">
+	        <button class="btn btn-primary btn-xl " id="deleteButton" type="submit" style="float: right; margin-right: 5px; margin-left: 5px;"><i class="fas fa-trash fa-fw"></i>delete menu</button>
+    	    <button class="btn btn-primary btn-xl " id="addButton" type="submit" style="float: right; margin-right: 5px; margin-left: 5px;" onclick="location.href='/coffee/list/a'"><i class="fas fa-plus fa-fw"></i>add menu</button>
+		</c:if>
         <!----------------------------------------------- 메뉴추가 add menu--------------------------------------------------------->
         <div class="col-md-6 col-lg-4 mb-5">
             <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#addmenuMoal">
                 <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                     <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                 </div> 
-                <button class="btn btn-primary btn-xl " id="addButton" type="submit" style="float: right;"onclick="location.href='/coffee/list/a'" >add menu</button>
                 <!-- <img class="img-fluid" src="assets/img/portfolio/add menu.png" alt="..." /> -->
             </div>
         </div>
 
 
-       <!-- add menu Modal-->
-        <div class="portfolio-modal modal fade" id="addmenuMoal" tabindex="-1" aria-labelledby="addmenuMoal" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                    <div class="modal-body text-center pb-5">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">add menu</h2>
-                                    <!-- Icon Divider-->
-                                    <div class="divider-custom">
-                                        <div class="divider-custom-line"></div>
-                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                        <div class="divider-custom-line"></div>
-                                    </div>
-                                    <!-- Portfolio Modal - Image-->
-                                    <!-- <img class="img-fluid rounded mb-5" src="assets/img/portfolio/circus.png" alt="..." /> -->
-                                    <button class="btn btn-primary btn-xl " id="addButton" type="submit" style="float: right;">add img</button>
-                                    <br>
-                                    <br>
-
-                                    <!-- Portfolio Modal - Text-->
-                                    <!-- <form id="contact" data-sb-form-api-token="API_TOKEN"> -->
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="menu_name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                                            <label for="menu_name">제품명</label>
-                                            <div class="invalid-feedback" data-sb-feedback="name:required">제품명을 입력해주세요</div>
-                                        </div>
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="menu_price" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                                            <label for="menu_price">가격</label>
-                                            <div class="invalid-feedback" data-sb-feedback="name:required">제품명을 입력해주세요</div>
-                                        </div>
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="menu_info" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                                            <label for="menu_info">제품 상세 설명</label>
-                                            <div class="invalid-feedback" data-sb-feedback="name:required">제품 상세설명 입력해주세요</div>
-                                        </div>
-
-                                        <button class="btn btn-primary btn-xl disabled" id="Button" type="submit">login</button>
-                                    <!-- </form> -->
-                                    <button class="btn btn-primary" data-bs-dismiss="modal">
-                                        <i class="fas fa-xmark fa-fw"></i>
-                                        Close Window
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <!------------------------------------------------ 장바구니 Section--------------------------------------------------->
-        <section class="page-section" id="contact">
-            <div class="container">
-                <!-- Contact Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Cart list</h2>
-                <!-- Icon Divider-->
-                <div class="divider-custom">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                    <h4 class="text-uppercase mb-4">Around the Web</h4>
-                </div>
-
-
-                <!-- Contact Section Form-->
-                <div class="row justify-content-center">
-                    <div class="col-lg-8 col-xl-7">
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- * * SB Forms Contact Form * *-->
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- This form is pre-integrated with SB Forms.-->
-                        <!-- To make this form functional, sign up at-->
-                        <!-- https://startbootstrap.com/solution/contact-forms-->
-                        <!-- to get an API token!-->
-                        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                            <!-- Name input-->
-                            <div class="form-floating mb-3">
-                                <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                                <label for="name">ID </label>
-                                <div class="invalid-feedback" data-sb-feedback="name:required">사원 번호를 입력해주세요</div>
-                            </div>
-                            <!--이메일 입력창 Email address input-->
-                            <!-- <div class="form-floating mb-3">
-                                <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
-                                <label for="email">Email address</label>
-                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
-                            </div> -->
-                            <!-- Password input-->
-                            <div class="form-floating mb-3">
-                                <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
-                                <label for="phone">password</label>
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">비밀번호를 입력해주세요.</div>
-                            </div>
-                            <!-- Message input-->
-                            <!-- <div class="form-floating mb-3">
-                                <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
-                                <label for="message">Message</label>
-                                <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
-                            </div> -->
-                            <!-- Submit success message-->
-                            <!---->
-                            <!-- This is what your users will see when the form-->
-                            <!-- has successfully submitted-->
-                            <div class="d-none" id="submitSuccessMessage">
-                                <div class="text-center mb-3">
-                                    <div class="fw-bolder">Form submission successful!</div>
-                                    To activate this form, sign up at
-                                    <br />
-                                    <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                                </div>
-                            </div>
-                            <!-- Submit error message-->
-                            <!---->
-                            <!-- This is what your users will see when there is-->
-                            <!-- an error submitting the form-->
-                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                            <!-- Submit Button-->
-                            <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">login</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- About Section-->
-        <section class="page-section bg-primary text-white mb-0" id="about">
-            <div class="container">
-                <!-- About Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-white">About</h2>
-                <!-- Icon Divider-->
-                <div class="divider-custom divider-light">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <!-- About Section Content-->
-                <div class="row">
-                    <div class="col-lg-4 ms-auto"><p class="lead">Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional SASS stylesheets for easy customization.</p></div>
-                    <div class="col-lg-4 me-auto"><p class="lead">You can create your own custom avatar for the masthead, change the icon in the dividers, and add your email address to the contact form to make it fully functional!</p></div>
-                </div>
-                <!-- About Section Button-->
-                <div class="text-center mt-4">
-                    <a class="btn btn-xl btn-outline-light" href="https://startbootstrap.com/theme/freelancer/">
-                        <i class="fas fa-download me-2"></i>
-                        Free Download!
-                    </a>
-                </div>
-            </div>
-        </section>
         <!-- Footer-->
         <footer class="footer text-center">
             <div class="container">

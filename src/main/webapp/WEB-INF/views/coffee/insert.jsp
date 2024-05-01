@@ -43,7 +43,7 @@
 	<div class="edit-box">
 		<!-- 이미지 박스 -->
 		<div class="d-flex justify-content-center">
-			<img alt="사진" src="/assets/img/portfolio/profileImg.png" class="imgBox">
+			<img alt="사진" src="../../../resources/images/profileImg.png" class="imgBox">
 		</div>
 		<form action="/coffee/list/a" method="post" enctype="multipart/form-data">
 			<!-- 파일 선택 버튼 -->

@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.myapp.coffee.dao.ICoffeeRepository;
 import com.example.myapp.coffee.model.Coffee;
 import com.example.myapp.coffee.service.ICoffeeService;
 
@@ -32,17 +31,18 @@ public class CoffeeController {
 	@Autowired
 	ICoffeeService coffeeService;
 	
-	@Autowired
-	ICoffeeRepository repo;
-
 	/**
 	 * 커피 리스트 조회 화면
-	 * 
 	 * @return
 	 */
 	@GetMapping("/coffee/list")
 	public String getCoffeeList(Model model, HttpSession session) {
 		List<Coffee> coffeeList = coffeeService.getCoffeeList();
+		int custId = (int)session.getAttribute("custId");
+		String role = (String)session.getAttribute("role");
+		model.addAttribute("custId", custId);
+		model.addAttribute("role", role);
+		logger.info(">>>role" + role);
 		model.addAttribute("coffeeList", coffeeList);
 		return "coffee/list";
 	}
@@ -60,7 +60,6 @@ public class CoffeeController {
 
 	/**
 	 * 커피 정보 수정
-	 * 
 	 * @param coffee
 	 * @param redirectAttr
 	 * @return
@@ -196,27 +195,28 @@ public class CoffeeController {
 	 * @param redirectAttr
 	 * @return
 	 */
-	@DeleteMapping("/coffee/list/{coffeeId}")
-	public String deleteCoffeeInfo(@PathVariable int coffeeId,
+	@PostMapping("/coffee/info/c")
+	public String deleteCoffeeInfo(@RequestParam int coffeeId,
 									HttpSession session,
 									RedirectAttributes redirectAttr) {
 		// 세션 정보에서 role이 관리자인지 확인
 		String role = (String) session.getAttribute("role");
+		logger.info(">>>커피 정보 삭제 진입, role" + role);
+		logger.info(">>>coffeeId: " + coffeeId);
 		if (role != null && role.equals("ROLE_ADMIN")) {
 			// 관리자인 경우에만 삭제 가능
 			try {
-				// 파일 삭제
-				coffeeService.deleteFile(coffeeId);
-
 				// 커피 정보 삭제
 				coffeeService.deleteCoffeeInfo(coffeeId);
-
+				logger.info(">>>커피 정보 삭제 완료");
 			} catch (RuntimeException e) {
 				redirectAttr.addFlashAttribute("message", e.getMessage());
+				logger.info("커피 정보 삭제 에러 : " + e.getMessage());
 			}
 		} else {
 			// 관리자가 아닌 경우 삭제 불가
 			redirectAttr.addFlashAttribute("message", "관리자만 커피 정보를 삭제할 수 있습니다.");
+			logger.info("관리자가 아니라 커피 정보 삭제가 불가하다.");
 		}
 		return "redirect:/coffee/list";
 	}

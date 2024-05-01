@@ -29,7 +29,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <!-- <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Portfolio</a></li> -->
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">로그인 페이지</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">로그인 페이지</a></li>
                     </ul>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
                                 <label for="name">NAME</label>
-                                <div class="invalid-feedback" data-sb-feedback="name:required">사원 이름을 입력해주세요!!!</div>
+                                <div class="invalid-feedback" data-sb-feedback="name:required">사원 이름을 입력해주세요</div>
                             </div>
     
                             <!-- ID input-->
@@ -112,16 +112,6 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-        
-        <script type="text/javascript">
-        $(document).ready(function() {
-			$('#createButton').on("click",function(){
-				e.preventDefault(); // 서브밋 기능 중단
-				alert(3333);
-			}); //-> 계정생성 버튼 끝
-				
-				
-        });
-		</script>
+       
     </body>
 </html>

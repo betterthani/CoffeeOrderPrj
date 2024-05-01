@@ -17,8 +17,8 @@ public class BuyService implements IBuyService{
 
 	@Override
 	@Transactional("transactionManager")
-	public boolean insertBuy(Buy buy) {
-		return buyRepository.insertBuy(buy);
+	public boolean insertBuy(int coffeeId, int custId) {
+		return buyRepository.insertBuy(coffeeId, custId);
 	}
 	
 	// 병훈 - 주문 리스트

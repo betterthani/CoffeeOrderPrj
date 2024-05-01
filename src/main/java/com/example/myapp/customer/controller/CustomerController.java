@@ -146,11 +146,13 @@ public class CustomerController {
 				// 회원가입 성공 시 로그인 페이지로 이동
 				logger.info(">>>성공 ");
 				redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다. 로그인해주세요.");
-				return "home";
+				redirectAttributes.addFlashAttribute("code", 200);
+				return "redirect:/coffee/#contact";
 			} else {
 				// 회원가입 실패 시 회원가입 페이지로 다시 이동
 				logger.info(">>>실패 ");
 				redirectAttributes.addFlashAttribute("message", "회원가입에 실패했습니다. 다시 시도해주세요.");
+				redirectAttributes.addFlashAttribute("code", 300);
 				return "redirect:/coffee/signup";
 			}
 		} catch (RuntimeException e) {

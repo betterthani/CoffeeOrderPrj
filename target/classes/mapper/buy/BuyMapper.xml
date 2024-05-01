@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.myapp.buy.dao.IBuyRepository">
 	<insert id="insertBuy" parameterType="com.example.myapp.buy.model.Buy">
+		<selectKey resultType="string" keyProperty="coffeeName" order="BEFORE">
+			SELECT
+				coffee_name
+			FROM COFFEE
+			WHERE COFFEE_ID = #{coffeeId}
+		</selectKey>
 		INSERT INTO buy
 		(
 			BUY_ID
@@ -16,15 +22,15 @@
 		(
 			buy_seq.NEXTVAL
 			, #{coffeeId}
-			, #{customerId}
+			, #{custId}
 			, SYSDATE
-			, #{buyCount}
-			, #{buyMenu}
-			, #{addShot}
+			, 1
+			, #{coffeeName}
+			, 1
 		)
 	</insert>
 	
-	<select id="getBuyList" resultType="com.example.myapp.buy.model.Buy"> 
+	<select id="getBuyList" resultType="hashmap"> 
 		SELECT 
 			BUY_ID
 			, COFFEE_ID

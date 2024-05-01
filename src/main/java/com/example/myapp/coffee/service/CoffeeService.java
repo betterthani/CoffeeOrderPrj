@@ -44,7 +44,7 @@ public class CoffeeService implements ICoffeeService {
 		
 		// 기존 이미지 파일 경로 갖고 오기
 		String uuidFileName = coffeeInfo.getCoffeeImage(); 
-		logger.info(">>>> 기존 파일 경로 : " + uuidFileName);
+		logger.info(">>>> coffeeService 기존 파일 경로 : " + uuidFileName);
 		File file = new File(uuidFileName);
 		boolean isDeleted = file.delete();
 	}
