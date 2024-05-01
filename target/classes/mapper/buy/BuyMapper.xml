@@ -40,6 +40,8 @@
 			, BUY_MENU
 			, ADD_SHOT
 		FROM buy 
+		WHERE CUSTOMER_ID = #{custId}
+		ORDER BY BUY_TIME DESC
 	</select>
 
 </mapper>

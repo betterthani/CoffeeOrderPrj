@@ -12,6 +12,6 @@ public interface IBuyRepository {
 	public boolean insertBuy(@Param("coffeeId") int coffeeId, @Param("custId") int custId);
 	
 	//병훈 - 주문 리스트
-	public List<Buy> getBuyList();
+	public List<Buy> getBuyList(int custId);
 
 }

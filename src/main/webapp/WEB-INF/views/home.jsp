@@ -120,7 +120,7 @@
                             <!-- an error submitting the form-->
                             <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
                             <!-- 로그인 버튼 Button-->
-                            <input type="submit" class="btn btn-primary btn-xl" value="login">
+                            <input type="submit" class="btn btn-primary btn-xl" value="login" id="loginBtn">
                             <a href="/coffee/signup"><input type="button" class="btn btn-primary btn-xl" value="create account"></a>
                             <!-- <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">login</button> -->
                         </form>

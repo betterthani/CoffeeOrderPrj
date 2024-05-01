@@ -34,9 +34,9 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio"><i class="fas fa-coffee"></i>메뉴</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/coffee/list?custId=${custId}"><i class="fas fa-coffee"></i>메뉴</a></li>
 	                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded " href="/coffee/orderList?custId=${custId}"><i class="fas fa-shopping-cart fa-fw"></i>주문</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about"><i class="fas fa-xmark"></i>로그아웃</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact"><i class="fas fa-xmark"></i>로그아웃</a></li>
                     </ul>
                 </div>
             </div>
@@ -134,7 +134,6 @@
         </c:forEach>
 
 		<c:if test="${role eq 'ROLE_ADMIN'}">
-	        <button class="btn btn-primary btn-xl " id="deleteButton" type="submit" style="float: right; margin-right: 5px; margin-left: 5px;"><i class="fas fa-trash fa-fw"></i>delete menu</button>
     	    <button class="btn btn-primary btn-xl " id="addButton" type="submit" style="float: right; margin-right: 5px; margin-left: 5px;" onclick="location.href='/coffee/list/a'"><i class="fas fa-plus fa-fw"></i>add menu</button>
 		</c:if>
         <!----------------------------------------------- 메뉴추가 add menu--------------------------------------------------------->

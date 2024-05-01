@@ -79,11 +79,13 @@ public class BuyController {
 			// 로그인되지 않았다면 로그인 페이지로 리다이렉트
 			return "redirect:/coffee/login";
 		}*/
-
-		// 주문 목록을 서비스로부터 가져옴
-		List<Buy> buyList = buyService.getBuyList();
+		
+		int custId = (int)session.getAttribute("custId");
 		String employeeNumber = (String)session.getAttribute("employeeNumber");
 		model.addAttribute("employeeNumber", employeeNumber);
+
+		// 주문 목록을 서비스로부터 가져옴
+		List<Buy> buyList = buyService.getBuyList(custId);
 
 		// 모델에 주문 목록 추가
 		model.addAttribute("buyList", buyList);

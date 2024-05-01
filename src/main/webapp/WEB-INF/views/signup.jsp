@@ -59,20 +59,20 @@
                         <form id="contactForm" data-sb-form-api-token="API_TOKEN" action="/coffee/signup" method="post">
                             <!-- Name input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                                <input class="form-control" id="name" name="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
                                 <label for="name">NAME</label>
                                 <div class="invalid-feedback" data-sb-feedback="name:required">사원 이름을 입력해주세요</div>
                             </div>
     
                             <!-- ID input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="employeeNumber" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                                <input class="form-control" id="employeeNumber" name="employeeNumber" type="text" placeholder="Enter your name..." data-sb-validations="required" />
                                 <label for="id">ID</label>
                                 <div class="invalid-feedback" data-sb-feedback="id:required">사원 번호를 입력해주세요</div>
                             </div>
                             <!-- Password input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="password" type="password" placeholder="Enter your name..." data-sb-validations="required" />
+                                <input class="form-control" id="password" name="password" type="password" placeholder="Enter your name..." data-sb-validations="required" />
                                 <label for="password">Password</label>
                                 <div class="invalid-feedback" data-sb-feedback="password:required">비밀번호를 입력해주세요.</div>
                             </div>
@@ -112,6 +112,32 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+       <script type="text/javascript">
+	       window.onload = function(){
+	    	  
+	    	   $('#createButton').on('click',function(){
+	    		   let name = $('#name').val();
+		    	   let employeeNumber = $('#employeeNumber').val();
+		    	   let password = $('#password').val();
+		    	   
+		    	   if(name == ''){
+		    		   alert("이름을 입력하세요");
+		    		   return false;
+		    	   }
+		    	   
+		    	   if(employeeNumber == ''){
+		    		   alert("사원번호를 입력하세요");
+		    		   return false;
+		    	   }
+		    	   
+		    	   if(password == ''){
+		    		   alert("비밀번호를 입력하세요");
+		    		   return false;
+		    	   }
+	    	   });
+	    	   
+	       }
        
+       </script>
     </body>
 </html>

@@ -23,8 +23,8 @@ public class BuyService implements IBuyService{
 	
 	// 병훈 - 주문 리스트
 	@Override
-	public List<Buy> getBuyList() {
-		return buyRepository.getBuyList();
+	public List<Buy> getBuyList(int custId) {
+		return buyRepository.getBuyList(custId);
 	}
 	
 

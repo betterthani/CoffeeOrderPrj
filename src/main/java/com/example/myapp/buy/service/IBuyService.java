@@ -12,6 +12,6 @@ public interface IBuyService {
 	public boolean insertBuy(int coffeeId, int custId);
 	
 	// 병훈 - 주문 리스트 페이지
-	public List<Buy> getBuyList();
+	public List<Buy> getBuyList(int custId);
 
 }

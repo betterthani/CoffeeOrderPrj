@@ -73,7 +73,7 @@ public class CustomerController {
 		if(employeeNumber == null || employeeNumber == "") {
 			// 사원번호(로그인id)가 없을 경우
 			logger.info(">>> id 없음");
-			return "coffee/login";
+			return "redirect:/coffee/#contact";
 		} else {
 			// 사원번호가 있을 경우
 			// 비밀번호 조회
