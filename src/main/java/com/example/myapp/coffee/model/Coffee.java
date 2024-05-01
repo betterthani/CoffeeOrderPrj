@@ -9,11 +9,10 @@ public class Coffee {
 	
 	private int coffeeId;
 	private String coffeeName;
-	private String kaclInfo;
+	private String kcalInfo;
 	private String coffeeImage;
 	private int amount;
 	private String category;
-	private String iceHot;
 	
 	/*ID
 	COFFEE_NAME

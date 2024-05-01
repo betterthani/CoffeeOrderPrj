@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -42,9 +41,11 @@ public class CoffeeController {
 	 * @return
 	 */
 	@GetMapping("/coffee/list")
-	public String getCoffeeList(Model model) {
+	public String getCoffeeList(Model model, HttpSession session) {
 		List<Coffee> coffeeList = coffeeService.getCoffeeList();
+		String uploadDir = session.getServletContext().getRealPath("/upload");
 		model.addAttribute("coffeeList", coffeeList);
+		model.addAttribute("dir", uploadDir + "/");
 		return "coffee/list";
 	}
 
@@ -94,11 +95,10 @@ public class CoffeeController {
 
 					Coffee newCoffee = new Coffee();
 					newCoffee.setCoffeeName(coffee.getCoffeeName());
-					newCoffee.setKaclInfo(coffee.getKaclInfo());
+					newCoffee.setKcalInfo(coffee.getKcalInfo());
 					newCoffee.setCoffeeImage(uploadDir + uuidFileName);
 					newCoffee.setAmount(coffee.getAmount());
 					newCoffee.setCategory(coffee.getCategory());
-					newCoffee.setIceHot(coffee.getIceHot());
 					coffeeService.updateCoffeeInfo(newCoffee);
 				}
 			} catch (Exception e) {
@@ -128,9 +128,8 @@ public class CoffeeController {
 	 * 병훈 - 새로운 커피 정보 추가 화면
 	 */
 	@GetMapping("/coffee/list/a")
-	public String insertNewCoffeeInfo(Model model) {
-		model.addAttribute("coffee", new Coffee());
-		return "coffee/insert"; // Assuming you have an insert page
+	public String insertNewCoffeeInfo() {
+		return "coffee/insert"; 
 	}
 
 	/**
@@ -143,50 +142,50 @@ public class CoffeeController {
 	 * @return
 	 */
 	@PostMapping("/coffee/list/a")
-	public String saveNewCoffeeInfo(@ModelAttribute Coffee coffee,
-									@RequestParam MultipartFile file,
-									HttpSession session,
-									RedirectAttributes redirectAttr) {
+	public String insertNewCoffeeInfo(@RequestParam String coffeeName, @RequestParam String kcalInfo, 
+			@RequestParam int amount, @RequestParam String category, @RequestParam MultipartFile coffeeImage,
+			HttpSession session, RedirectAttributes redirectAttr) {
 		// 세션 정보에서 role이 관리자인지 확인
+		logger.info(">>> controller 진입");
 		String role = (String) session.getAttribute("role");
 		if (role != null && role.equals("ROLE_ADMIN")) {
+			logger.info(">>> 관리자 맞음");
 			// 관리자인 경우에만 추가 가능
 			try {
-				if (file != null && !file.isEmpty()) {
-					String fileName = file.getOriginalFilename();
+				if (coffeeImage != null && !coffeeImage.isEmpty()) {
+					Coffee newCoffee = new Coffee();
+					newCoffee.setCategory(category);
+					newCoffee.setCoffeeName(coffeeName);
+					newCoffee.setAmount(amount);
+					newCoffee.setKcalInfo(kcalInfo);
+					
+					String fileName = coffeeImage.getOriginalFilename();
 					String fileExt = fileName.substring(fileName.lastIndexOf("."));
 					UUID uuid = UUID.randomUUID();
 					String uuidFileName = uuid + fileExt;
+					newCoffee.setCoffeeImage(uuidFileName);
 
 					// 파일 저장 경로 설정
 					String uploadDir = session.getServletContext().getRealPath("/upload");
-					logger.info("upload dir : " + uploadDir);
+					logger.info("이미지 upload 경로 : " + uploadDir);
 					File saveFilePath = new File(uploadDir, uuidFileName);
-					file.transferTo(saveFilePath);
+					coffeeImage.transferTo(saveFilePath);
 
-					// 커피 정보 저장
-					Coffee newCoffee = new Coffee();
-					newCoffee.setCoffeeName(coffee.getCoffeeName());
-					newCoffee.setKaclInfo(coffee.getKaclInfo());
-					newCoffee.setCoffeeImage(uploadDir + uuidFileName);
-					newCoffee.setAmount(coffee.getAmount());
-					newCoffee.setCategory(coffee.getCategory());
-					newCoffee.setIceHot(coffee.getIceHot());
 					boolean coffeeinsert = coffeeService.insertNewCoffeeInfo(newCoffee);
 					if (coffeeinsert) {
-						redirectAttr.addFlashAttribute("message", "커피 정보 추가 되었습니다.");
+						logger.info("커피 정보 추가 완료");
 					} else {
-						redirectAttr.addFlashAttribute("message", "커피 정보 추가에 실패했습니다.");
+						logger.info("커피 정보 추가 실패");
 					}
 				} else {
 					logger.info("업로드된 파일이 없습니다.");
 				}
 			} catch (Exception e) {
-				redirectAttr.addFlashAttribute("message", e.getMessage());
+				logger.info(e.getMessage());
 			}
 		} else {
 			// 관리자가 아닌 경우 추가 불가
-			redirectAttr.addFlashAttribute("message", "관리자만 커피 정보를 추가할 수 있습니다.");
+			logger.info(">>> 관리자 아님");
 		}
 		return "redirect:/coffee/list";
 	}

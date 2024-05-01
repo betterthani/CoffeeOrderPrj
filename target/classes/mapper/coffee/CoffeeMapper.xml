@@ -10,7 +10,6 @@
 			, COFFEE_IMAGE
 			, AMOUNT
 			, CATEGORY
-			, ICE_HOT
 		FROM coffee
 	</select>
 	
@@ -23,7 +22,6 @@
 			, COFFEE_IMAGE = #{coffeeImage}
 			, AMOUNT = #{amount}
 			, CATEGORY = #{category}
-			, ICE_HOT = #{iceHot}
 	</update>
 	
 	<select id="getCoffeeById" parameterType="int" resultType="com.example.myapp.coffee.model.Coffee">
@@ -34,7 +32,6 @@
 			, COFFEE_IMAGE
 			, AMOUNT
 			, CATEGORY
-			, ICE_HOT
 		FROM
 			coffee
 		WHERE id = #{coffeeId}
@@ -48,7 +45,6 @@
             , COFFEE_IMAGE
             , AMOUNT
             , CATEGORY
-            , ICE_HOT 
        from coffee 
        where 
        		coffee_id = #{coffeeId}
@@ -63,17 +59,15 @@
 				, COFFEE_IMAGE
 				, AMOUNT
 				, CATEGORY
-				, ICE_HOT
 			)
 		VALUES 
 			(
 				coffee_seq.NEXTVAL
 				, #{coffeeName}
-				, #{kaclInfo}
+				, #{kcalInfo}
 				, #{coffeeImage}
 				, #{amount}
 				, #{category}
-				, #{iceHot}
 			)
    </insert>
 
