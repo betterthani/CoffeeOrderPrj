@@ -43,9 +43,7 @@ public class CoffeeController {
 	@GetMapping("/coffee/list")
 	public String getCoffeeList(Model model, HttpSession session) {
 		List<Coffee> coffeeList = coffeeService.getCoffeeList();
-		String uploadDir = session.getServletContext().getRealPath("/upload");
 		model.addAttribute("coffeeList", coffeeList);
-		model.addAttribute("dir", uploadDir + "/");
 		return "coffee/list";
 	}
 
@@ -163,7 +161,7 @@ public class CoffeeController {
 					String fileExt = fileName.substring(fileName.lastIndexOf("."));
 					UUID uuid = UUID.randomUUID();
 					String uuidFileName = uuid + fileExt;
-					newCoffee.setCoffeeImage(uuidFileName);
+					newCoffee.setCoffeeImage("\\upload\\" + uuidFileName);
 
 					// 파일 저장 경로 설정
 					String uploadDir = session.getServletContext().getRealPath("/upload");

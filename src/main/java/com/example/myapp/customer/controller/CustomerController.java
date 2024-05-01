@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.myapp.customer.model.Customer;
@@ -65,8 +66,8 @@ public class CustomerController {
 	 * @return
 	 */
 	@PostMapping("/coffee/login")
-	public String getLogin(String employeeNumber
-							, String password
+	public String getLogin(@RequestParam String employeeNumber
+							, @RequestParam String password
 							, HttpSession session
 							, RedirectAttributes redirectAttr) {
 		if(employeeNumber == null || employeeNumber == "") {
@@ -77,7 +78,7 @@ public class CustomerController {
 			// 사원번호가 있을 경우
 			// 비밀번호 조회
 			Customer custInfo = customerService.getCustomer(employeeNumber, password);
-			logger.info(">>>조회 시작" + custInfo);
+			logger.info(">>>조회 완료");
 			if(custInfo != null) {
 				// 조회한 비밀번호가 있을 경우
 				logger.info(">>> 비밀번호 있음");
@@ -89,7 +90,9 @@ public class CustomerController {
 					session.setAttribute("custId", custInfo.getCustId()); //pk
 					session.setAttribute("role", custInfo.getRole()); // 관리자여부
 					session.setAttribute("employeeNumber", employeeNumber);//사원번호(로그인id)
-					return "coffee/list";
+
+					int custId = (int)session.getAttribute("custId");
+					return "redirect:/coffee/list?custId=" + custId;
 				} else {
 					// 비밀번호 맞지 않을 경우
 					logger.info(">>>> 비밀번호 안 맞음");

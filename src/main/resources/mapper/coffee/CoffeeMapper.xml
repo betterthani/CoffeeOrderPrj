@@ -11,6 +11,7 @@
 			, AMOUNT
 			, CATEGORY
 		FROM coffee
+		ORDER BY COFFEE_ID DESC
 	</select>
 	
 	<update id="updateCoffeeInfo" parameterType="com.example.myapp.coffee.model.Coffee">

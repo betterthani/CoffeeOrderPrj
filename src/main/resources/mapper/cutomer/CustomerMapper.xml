@@ -4,16 +4,16 @@
 
 	<select id="getCustomer" parameterType="hashMap" resultType="com.example.myapp.customer.model.Customer">
 		SELECT
-			CUSTOMER_ID
+			CUSTOMER_ID as custId
 			, ROLE
 			, NAME
-			, EMPLOYEE_NUMBER
+			, EMPLOYEE_NUMBER as employeeNumber
 			, PASSWORD
 			, POINT
 		FROM customer
 		WHERE 
-			employee_number = #{employeeNumber}
-			AND password = #{password}
+			EMPLOYEE_NUMBER = #{employeeNumber}
+			AND PASSWORD = #{password}
 	</select>
 	
 	<insert id="signUpCustomer" parameterType="com.example.myapp.customer.model.Customer">
