@@ -27,6 +27,14 @@
         </style>
     </head>
     <body id="page-top">
+    <script type="text/javascript">
+    	window.onload = function(){
+    		var message = '${message}';
+    		if(message){
+    			alert(message);
+    		}
+    	}
+    </script>
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container">
