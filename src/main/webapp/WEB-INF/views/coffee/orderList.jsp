@@ -20,6 +20,11 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <style type="text/css">
+        	#tableBox{
+        		text-align: center;
+        	}
+        </style>
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -41,10 +46,16 @@
             </div>
         </nav>
         <!-- Masthead-->
-        <header class="masthead bg-primary text-black text-center bg-opacity-25" >
+        <header class="bg-primary text-black text-center bg-opacity-25" >
             <div class="container d-flex align-items-center flex-column">
                 <!-- Masthead Avatar Image-->
-                <img class="masthead-avatar mb-5" src="../../../assets/img/receipt.png" alt="..." />
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <img class="masthead-avatar mb-5" src="../../../assets/img/receipt.png" alt="..." style="height: 100px; width: 100px;"/>
                 <!-- Masthead Heading-->
                 <h1 class="masthead-heading text-uppercase mb-0" style="font-size: 40px;">${employeeNumber}님의 커피 주문내역 입니다.</h1>
                 <!-- Icon Divider-->
@@ -56,44 +67,35 @@
                 <!-- Masthead Subheading-->
 
                 <h2 class="page-section-heading text-center text-uppercase text-black mb-0">주문 리스트</h2>
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                </div>
                 <br>
-                <table>
+                <table class="border border-success">
                     <thead>
-                    <tr>
-                        <th><h4 class="text-uppercase mb-4">주문 번호</h4></th>
-                        <th><h4 class="text-uppercase mb-4">주문 커피</h4></th>
-                        <th><h4 class="text-uppercase mb-4">주문 수량</h4></th>
-                        <th><h4 class="text-uppercase mb-4">샷 추가</h4></th>
-                        <th><h4 class="text-uppercase mb-4">주문 시간</h4></th>
-                        <!-- <th>주문 커피</th>
-                        <th>주문 수량</th>
-                        <th>샷 추가</th>
-                        <th>주문시간</th> -->
+                    <tr class="text-uppercase border border-success">
+                        <th class="border border-success">주문번호</th>
+                        <th class="border border-success">주문 커피</th>
+                        <th class="border border-success">주문 수량</th>
+                        <th class="border border-success">샷 추가</th>
+                        <th class="border border-success">주문 시간</th>
                     </tr>
                     </thead>
                     <tbody id="buyList">
             
                     <c:forEach var="order" items="${buyList}">
                         <tr>
-                            <td>${order.BUY_ID}</td>
-                            <td>${order.BUY_MENU}</td>
-                            <td>${order.BUY_COUNT}</td>
-                            <td>${order.ADD_SHOT}</td>
-                            <td>
+                            <td class="border border-success">${order.BUY_ID}</td>
+                            <td class="border border-success">${order.BUY_MENU}</td>
+                            <td class="border border-success">${order.BUY_COUNT}</td>
+                            <td class="border border-success">${order.ADD_SHOT}</td>
+                            <td class="border border-success">
                                 <fmt:formatDate value="${order.BUY_TIME}" type="both" />
                             </td>
-                            
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
                 <br>
-                <br>
-                <br>
-
                 <button class="btn btn-primary btn-xl " id="addButton" type="submit" style="float: right; margin-right: 5px; margin-left: 5px;" onclick="location.href='/coffee/list'"><i class="fas fa-backward fa-fw"></i>주문페이지 돌아가기</button>
+                <br>
             </div>
         </header>
         <!------------------------------------------- 아래 배너----------------------------------------->

@@ -54,14 +54,14 @@ public class CoffeeController {
 
 	/**
 	 * 커피 정보 수정 화면
-	 */
+	 *//*
 	@GetMapping("/coffee/list/b")
 	public String updateCoffeeInfo(Model model, @PathVariable int coffeeId) {
 		// 커피 정보 조회한거 가지고오기
 		Coffee coffee = coffeeService.getCoffeeById(coffeeId);
 		model.addAttribute("Coffee", coffee);
 		return "coffee/list";
-	}
+	}*/
 
 	/**
 	 * 커피 정보 수정
