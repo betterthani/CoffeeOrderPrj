@@ -18,9 +18,9 @@ public class LoginInterceptor implements HandlerInterceptor{
 		HttpSession session = request.getSession();
 		try {
 			// 세션에 정보가 있는지 확인 한 후, 정보가 없으면 로그인 페이지로 Redirect
-			String custId = (String) session.getAttribute("custId");
-			logger.info(">>>인터셉터 진입 custId : "+custId);
-			if(custId == null || custId.equals("")) {
+			String role = (String) session.getAttribute("role");
+			logger.info(">>>인터셉터 진입 role : "+ role);
+			if(role == null || role.equals("")) {
 				response.sendRedirect(request.getContextPath() + "/coffee"); // request.getContextPath() = myapp경로(기본 경로)
 				logger.info(">>>인터셉터 진입 후 경로 : "+ request.getContextPath() + "/coffee");
 			}
