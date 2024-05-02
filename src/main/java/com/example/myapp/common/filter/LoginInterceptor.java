@@ -19,10 +19,10 @@ public class LoginInterceptor implements HandlerInterceptor{
 		try {
 			// 세션에 정보가 있는지 확인 한 후, 정보가 없으면 로그인 페이지로 Redirect
 			String role = (String) session.getAttribute("role");
-			logger.info(">>>인터셉터 진입 role : "+ role);
 			if(role == null || role.equals("")) {
 				response.sendRedirect(request.getContextPath() + "/coffee"); // request.getContextPath() = myapp경로(기본 경로)
-				logger.info(">>>인터셉터 진입 후 경로 : "+ request.getContextPath() + "/coffee");
+			} else {
+				return true;
 			}
 		} catch(Exception e) {
 			e.printStackTrace(); // 예외발생 경로 추적하여 보여줌.

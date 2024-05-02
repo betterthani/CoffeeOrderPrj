@@ -80,6 +80,10 @@
 				<button type="submit" class="btn btn-success w-75" id="coffeeInsertBtn">커피 등록</button>
 			</div>
 		</form>
+		<!-- 뒤로 가기 버튼 -->
+		<div class="d-flex justify-content-end">
+			<a href="/coffee/list"><button type="button" class="btn-success btn">뒤로 가기</button></a>
+		</div>
 	</div>
 </div>
 
