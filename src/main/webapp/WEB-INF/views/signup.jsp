@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Freelancer - Start Bootstrap Theme</title>
+        <title>5TRILLION COFFEE</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
         <!-- Font Awesome icons (free version)-->
@@ -21,6 +21,14 @@
         <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     </head>
     <body id="page-top">
+    <script type="text/javascript">
+	  	window.onload = function(){
+	  		var message = '${message}';
+	  		if(message){
+	  			alert(message);
+	  		}
+	  	}
+	</script>
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav"  style="height: 80px;">
             <div class="container">
@@ -67,7 +75,7 @@
                             <!-- ID input-->
                             <div class="form-floating mb-3">
                                 <input class="form-control" id="employeeNumber" name="employeeNumber" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                                <label for="id">ID</label>
+                                <label for="id">EMPLOYEENUMBER</label>
                                 <div class="invalid-feedback" data-sb-feedback="id:required">사원 번호를 입력해주세요</div>
                             </div>
                             <!-- Password input-->

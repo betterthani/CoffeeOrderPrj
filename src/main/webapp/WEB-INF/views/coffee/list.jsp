@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Freelancer - Start Bootstrap Theme</title>
+        <title>5TRILLION COFFEE</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -23,6 +23,14 @@
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body id="page-top" >
+    <script type="text/javascript">
+    	window.onload = function(){
+    		var message = '${message}';
+    		if(message){
+    			alert(message);
+    		}
+    	}
+    </script>
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg bg-secondary text-dark fixed-top" id="mainNav" style="height: 80px;" >
             <div class="container">
@@ -36,7 +44,7 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/coffee/list?custId=${custId}"><i class="fas fa-coffee"></i>메뉴</a></li>
 	                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded " href="/coffee/orderList?custId=${custId}"><i class="fas fa-shopping-cart fa-fw"></i>주문</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact"><i class="fas fa-xmark"></i>로그아웃</a></li>
+	                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/coffee/logout"><i class="fas fa-xmark"></i>로그아웃</a></li>
                     </ul>
                 </div>
             </div>

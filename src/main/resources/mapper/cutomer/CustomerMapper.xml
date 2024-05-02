@@ -36,6 +36,14 @@
 				, '100000'
 			)
 	</insert>
+	
+	<select id="getCustomerNumber" parameterType="String" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM customer
+		WHERE 
+			EMPLOYEE_NUMBER = #{employeeNumber}
+	</select>
 
 
 </mapper>

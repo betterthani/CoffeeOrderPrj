@@ -16,7 +16,7 @@ public class BuyService implements IBuyService{
 	IBuyRepository buyRepository;
 
 	@Override
-	@Transactional("transactionManager")
+	@Transactional
 	public boolean insertBuy(int coffeeId, int custId) {
 		return buyRepository.insertBuy(coffeeId, custId);
 	}

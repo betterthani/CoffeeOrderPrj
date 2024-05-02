@@ -47,7 +47,7 @@
 		<beans:property name="defaultErrorView" value="error/default"/>
 	</beans:bean>
 	
-	<interceptors>
+	<!-- <interceptors>
 		<interceptor>
 			<mapping path="/coffee/buy/a"/>
 			<mapping path="/coffee/orderList"/>
@@ -57,7 +57,7 @@
 			<mapping path="/coffee/info/c"/>
 			<beans:bean class="com.example.myapp.common.filter.LoginInterceptor"/>
 		</interceptor>
-	</interceptors>
+	</interceptors> -->
 	
 	
 </beans:beans>

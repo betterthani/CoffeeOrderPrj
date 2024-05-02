@@ -17,6 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.myapp.buy.model.Buy;
 import com.example.myapp.buy.service.IBuyService;
+import com.example.myapp.coffee.model.Coffee;
+import com.example.myapp.coffee.service.ICoffeeService;
 
 @Controller
 public class BuyController {
@@ -24,16 +26,10 @@ public class BuyController {
 	
 	@Autowired
 	IBuyService buyService;
+	
+	@Autowired
+	ICoffeeService coffeeService;
 
-/*	*//**
-	 * 커피 주문 입력 화면
-	 * @return
-	 *//*
-	@GetMapping("/coffee/buy/a")
-	public String insertBuy() {
-		return "coffee/buy/a";
-	}
-*/	
 	/**
 	 * 커피 주문
 	 * @param buy
@@ -49,18 +45,24 @@ public class BuyController {
 			logger.info(">>>coffeeId" + coffeeId);
 			logger.info(">>>custId" + custId);
 			boolean isBuyInsert = buyService.insertBuy(coffeeId, custId);
+			
+			//커피 id에 따른 커피 이름 갖고오기
+			Coffee coffee = coffeeService.getCoffeeById(coffeeId);
+			
 			if(isBuyInsert) {
 				// insert가 성공했을 경우
 				// insert 후 커피 주문 리스트 조회화면으로 이동
 				logger.info(">>> 주문 입력 성공 ");
+				redirectAttr.addFlashAttribute("message", coffee.getCoffeeName() + " 주문이 완료 되었습니다.");
 				return "redirect:/coffee/orderList?custId=" + custId;
 			} else {
 				// insert가 실패했을 경우
 				logger.info(">>> 주문 입력 실패 ");
+				redirectAttr.addFlashAttribute("message", "커피 주문이 실패하였습니다. 다시 주문해주세요.");
 				return "redirect:/coffee/list";
 			}
 		} catch(RuntimeException e) {
-			redirectAttr.addFlashAttribute("message", e.getMessage());
+			redirectAttr.addFlashAttribute("message", "커피 주문시 에러가 발생하였습니다. 관리자에 문의해주세요.");
 			logger.info(">>> 커피 주문 에러메세지 : " + e.getMessage());
 		}
 		return "redirect:/coffee/list";
@@ -74,11 +76,6 @@ public class BuyController {
 	 */
 	@GetMapping("/coffee/orderList")
 	public String getOrderList(Model model, HttpSession session) {
-		/*// 사용자가 로그인했는지 확인
-		if (session.getAttribute("custId") == null) {
-			// 로그인되지 않았다면 로그인 페이지로 리다이렉트
-			return "redirect:/coffee/login";
-		}*/
 		
 		int custId = (int)session.getAttribute("custId");
 		String employeeNumber = (String)session.getAttribute("employeeNumber");

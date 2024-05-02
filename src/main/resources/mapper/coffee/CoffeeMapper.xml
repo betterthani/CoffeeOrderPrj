@@ -28,9 +28,9 @@
 	<select id="getCoffeeById" parameterType="int" resultType="com.example.myapp.coffee.model.Coffee">
 		SELECT
 			COFFEE_ID
-			, COFFEE_NAME
+			, COFFEE_NAME as coffeeName
 			, KCAL_INFO
-			, COFFEE_IMAGE
+			, COFFEE_IMAGE as coffeeImage
 			, AMOUNT
 			, CATEGORY
 		FROM

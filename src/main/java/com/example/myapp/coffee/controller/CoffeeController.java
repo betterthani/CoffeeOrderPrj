@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,7 +62,7 @@ public class CoffeeController {
 	 * @param coffee
 	 * @param redirectAttr
 	 * @return
-	 */
+	 *//*
 	@PutMapping("/coffee/list/b")
 	public String updateCoffeeInfo(@RequestParam Coffee coffee
 									, @RequestParam MultipartFile file
@@ -74,7 +73,7 @@ public class CoffeeController {
 		if (role.equals("ROLE_ADMIN")) {
 			// 관리자일 경우 update가능
 			// 기존 파일 삭제
-			coffeeService.deleteFile(coffee.getCoffeeId());
+			deleteCoffeeFile(coffee.getCoffeeId(),session);
 			
 			try {
 				if(file != null && !file.isEmpty()) {
@@ -106,20 +105,20 @@ public class CoffeeController {
 			redirectAttr.addFlashAttribute("message", "관리자만 게시물 수정이 가능합니다.");
 		}
 		return "redirect:/coffee/list";
-	}
+	}*/
 	
 	/**
 	 * 민서 - 커피 정보
 	 * @param coffeeId
 	 * @param model
 	 * @return
-	 */
+	 *//*
 	@GetMapping("/coffee/detail/{coffeeId}")
 	public String getCoffeeInfoDetail(@PathVariable int coffeeId, Model model) {
 		Coffee coffeeInfo = coffeeService.getCoffeeInfoDetail(coffeeId);
 		model.addAttribute("coffeeInfo", coffeeInfo);
 		return "/coffee/detail/{coffeeId}";
-	}   
+	}   */
 	
 	/**
 	 * 병훈 - 새로운 커피 정보 추가 화면
@@ -171,18 +170,23 @@ public class CoffeeController {
 					boolean coffeeinsert = coffeeService.insertNewCoffeeInfo(newCoffee);
 					if (coffeeinsert) {
 						logger.info("커피 정보 추가 완료");
+						redirectAttr.addFlashAttribute("message", "커피 정보가 추가되었습니다.");
 					} else {
 						logger.info("커피 정보 추가 실패");
+						redirectAttr.addFlashAttribute("message", "커피 정보가 추가가 실패하였습니다.");
 					}
 				} else {
 					logger.info("업로드된 파일이 없습니다.");
+					redirectAttr.addFlashAttribute("message", "업로드된 파일이 없습니다.");
 				}
 			} catch (Exception e) {
 				logger.info(e.getMessage());
+				redirectAttr.addFlashAttribute("message", "정보 추가시 에러가 발생하였습니다.");
 			}
 		} else {
 			// 관리자가 아닌 경우 추가 불가
 			logger.info(">>> 관리자 아님");
+			redirectAttr.addFlashAttribute("message", "관리자가 아니어 추가가 불가합니다.");
 		}
 		return "redirect:/coffee/list";
 	}
@@ -206,11 +210,21 @@ public class CoffeeController {
 		if (role != null && role.equals("ROLE_ADMIN")) {
 			// 관리자인 경우에만 삭제 가능
 			try {
-				// 커피 정보 삭제
-				coffeeService.deleteCoffeeInfo(coffeeId);
-				logger.info(">>>커피 정보 삭제 완료");
+				
+				// 기존 커피 사진 삭제
+				boolean isFileDelete = deleteCoffeeFile(coffeeId,session);
+				if(isFileDelete) {
+					// 경로에 있는 기존 파일 삭제 완료시 커피 정보 삭제
+					// 커피 정보 삭제
+					coffeeService.deleteCoffeeInfo(coffeeId);
+					logger.info(">>>커피 정보 삭제 완료");
+					redirectAttr.addFlashAttribute("message", "커피 정보가 삭제되었습니다.");
+				} else {
+					logger.info(">>>커피 정보 삭제 실패");
+					redirectAttr.addFlashAttribute("message", "기존에 있는 파일이 삭제 되지않아 커피 정보 삭제가 불가합니다.");
+				}
 			} catch (RuntimeException e) {
-				redirectAttr.addFlashAttribute("message", e.getMessage());
+				redirectAttr.addFlashAttribute("message", "에러가 발생하였습니다.");
 				logger.info("커피 정보 삭제 에러 : " + e.getMessage());
 			}
 		} else {
@@ -221,7 +235,30 @@ public class CoffeeController {
 		return "redirect:/coffee/list";
 	}
 
+	// 파일 삭제
+	@PostMapping("/coffee/file/c")
+	public boolean deleteCoffeeFile(@RequestParam int coffeeId, HttpSession session) {
+		// 해당 커피 정보 찾기
+		Coffee coffeeInfo = coffeeService.getCoffeeById(coffeeId);
 
+		// 기존 이미지 파일 경로 갖고 오기
+		String uuidFileName = coffeeInfo.getCoffeeImage();
+		logger.info(">>>> coffeeService 기존 파일 경로 : " + uuidFileName); // \\upload\7e09d579-c4f5-405f-a45f-6d03bc652ebe.jpg
+		// 파일 저장 경로 설정
+		String uploadDir = session.getServletContext().getRealPath("");
+		logger.info(">>>> 파일 삭제 uploadFilePath : " + uploadDir);
+
+		File file = new File(uploadDir, uuidFileName);
+		boolean isFileDelete = file.delete();
+		if(isFileDelete) {
+			logger.info("기존 파일 삭제 완료");
+			return true;
+
+		} else {
+			logger.info("기존 파일 삭제 실패");
+			return false;
+		}
+	}
 	
 	
 }

@@ -10,5 +10,8 @@ public interface ICustomerRepository {
 	public Customer getCustomer(@Param("employeeNumber") String employeeNumber, @Param("password") String password);
 	
 	// 병훈 - 회원가입
-	public boolean signUpCustomer(Customer customer); 
+	public boolean signUpCustomer(Customer customer);
+
+	// 회원가입시 사원번호 존재하는지 조회
+	public int getCustomerNumber(String employeeNumber); 
 }

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Coffee</title>
+<title>5TRILLION COFFEE</title>
 <!-- jquery : bootstrap, datepicker -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>  
 
@@ -39,6 +39,15 @@
 </style>
 </head>
 <body>
+<script type="text/javascript">
+  	window.onload = function(){
+  		var message = '${message}';
+  		if(message){
+  			alert(message);
+  		}
+  	}
+</script>
+
 <div class="d-flex justify-content-center w-100 my-3">
 	<div class="edit-box">
 		<!-- 이미지 박스 -->
@@ -57,7 +66,7 @@
 			<div class="d-flex justify-content-center">
 				<div class="w-75 my-3">
 					<input type="text" id="coffeeName" name= "coffeeName" class="form-control name" placeholder="커피 이름을 입력해주세요.">
-					<input type="text" id="kcalInfo"  name= "kcalInfo" class="form-control mt-3 statusMessage" placeholder="칼로리 등 정보를 입력해주세요.">
+					<input type="text" id="kcalInfo"  name= "kcalInfo" class="form-control mt-3 statusMessage" placeholder="칼로리 등 정보를 입력해주세요." value="Kcal">
 					<input type="text" id="amount"  name= "amount" class="form-control mt-3 " placeholder="가격을 입력해주세요.">
 					<select id="category"  name="category" class="form-control mt-3 " >
 			            <option value="coffee">coffee</option>

@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Freelancer - Start Bootstrap Theme</title>
+        <title>5TRILLION COFFEE</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -29,6 +29,14 @@
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     </head>
     <body id="page-top">
+    <script type="text/javascript">
+	  	window.onload = function(){
+	  		var message = '${message}';
+	  		if(message){
+	  			alert(message);
+	  		}
+	  	}
+	</script>
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container">

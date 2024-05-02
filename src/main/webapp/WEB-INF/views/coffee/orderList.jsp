@@ -7,7 +7,7 @@ pageEncoding="UTF-8"%>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>커피 주문 완료</title>
+    <title>5TRILLION COFFEE</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -37,6 +37,14 @@ pageEncoding="UTF-8"%>
     </style>
 </head>
 <body>
+<script type="text/javascript">
+  	window.onload = function(){
+  		var message = '${message}';
+  		if(message){
+  			alert(message);
+  		}
+  	}
+</script>
 
 <div class="container">
     <h1>${employeeNumber}님의 커피 주문이 완료되었습니다.</h1> <hr>

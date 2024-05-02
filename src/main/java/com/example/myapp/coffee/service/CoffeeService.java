@@ -35,7 +35,7 @@ public class CoffeeService implements ICoffeeService {
 		return coffeeRepository.updateCoffeeInfo(coffee);
 	}
 	
-	// 커피정보 파일 삭제
+/*	// 커피정보 파일 삭제
 	@Override
 	@Transactional
 	public void deleteFile(int coffeeId) {
@@ -43,11 +43,29 @@ public class CoffeeService implements ICoffeeService {
 		Coffee coffeeInfo = coffeeRepository.getCoffeeById(coffeeId);
 		
 		// 기존 이미지 파일 경로 갖고 오기
-		String uuidFileName = coffeeInfo.getCoffeeImage(); 
+		String uuidFileName = coffeeInfo.getCoffeeImage();
 		logger.info(">>>> coffeeService 기존 파일 경로 : " + uuidFileName);
+		
+		int lastIndex = uuidFileName.lastIndexOf("\\");
+		
+		uuidFileName = uuidFileName.substring(lastIndex + 1);
+		logger.info(">>>> coffeeService 파일 삭제 관련한 파일 이름 : " + uuidFileName);
+		
+		// 기존 경로 가져오기
+		String uploadDir = session.getServletContext();
+		
+		
 		File file = new File(uuidFileName);
-		boolean isDeleted = file.delete();
-	}
+		boolean isFileDelete = file.delete();
+		if(isFileDelete) {
+			logger.info("기존 파일 삭제 완료");
+			logger.info(">>>> coffeeService 파일 삭제 관련한 파일 이름 : " + uuidFileName);
+			
+		} else {
+			logger.info("기존 파일 삭제 실패");
+			logger.info(">>>> coffeeService 파일 삭제 관련한 파일 이름 : " + uuidFileName);
+		}
+	}*/
 
 	// 커피 정보 조회
 	@Override
@@ -55,7 +73,7 @@ public class CoffeeService implements ICoffeeService {
 		return coffeeRepository.getCoffeeById(coffeeId);
 	}
 	
-	// 민서_커피 정보 
+	// 민서_커피 정보 - 미사용
 	@Override
 	public Coffee getCoffeeInfoDetail(int coffeeId) {
 		return coffeeRepository.getCoffeeInfoDetail(coffeeId);
