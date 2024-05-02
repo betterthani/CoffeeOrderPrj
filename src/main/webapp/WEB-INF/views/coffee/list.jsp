@@ -163,7 +163,7 @@
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <h4 class="text-uppercase mb-4">Location</h4>
                         <p class="lead mb-0">
-                            2215 John Daniel Drive
+                            SalTux
                             <br />
                             Clark, MO 65243
                         </p>
@@ -178,11 +178,12 @@
                     </div>
                     <!-- Footer About Text-->
                     <div class="col-lg-4">
-                        <h4 class="text-uppercase mb-4">About Freelancer</h4>
+                        <h4 class="text-uppercase mb-4">About Team</h4>
                         <p class="lead mb-0">
-                            Freelance is a free to use, MIT licensed Bootstrap theme created by
-                            <a href="http://startbootstrap.com">Start Bootstrap</a>
+                            Ha-eun, Myoung-geun, Byeong-hun, Min-seo
+                            <a href="http://startbootstrap.com">Feel Free to meet!</a>
                             .
+
                         </p>
                     </div>
                 </div>
@@ -190,7 +191,7 @@
         </footer>
         <!-- Copyright Section-->
         <div class="copyright py-4 text-center text-white">
-            <div class="container"><small>Copyright &copy; Your Website 2023</small></div>
+            <div class="container"><small>Copyright &copy; Saltux Website 2024</small></div>교육 프로그램
         </div>
         <!-- Portfolio Modals-->
         <!-- Bootstrap core JS-->

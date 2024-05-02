@@ -105,9 +105,9 @@
                             </div>
                             <!-- Password input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="password" id="password" type="password" data-sb-validations="required" />
-                                <label for="phone">password</label>
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">비밀번호를 입력해주세요.</div>
+                                <input class="form-control" name="password" id="password" type="password" data-sb-validations="required" placeholder="Enter your name..." />
+                                <label for="password">password</label>
+                                <div class="invalid-feedback" data-sb-feedback="password:required">비밀번호를 입력해주세요.</div>
                             </div>
                             
                             <!-- Submit success message-->
@@ -161,7 +161,7 @@
                 </div> -->
             </div>
         </section>
-        <!-- Footer-->
+                <!------------------------------------------- 아래 배너----------------------------------------->
         <footer class="footer text-center">
             <div class="container">
                 <div class="row">
@@ -169,7 +169,7 @@
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <h4 class="text-uppercase mb-4">Location</h4>
                         <p class="lead mb-0">
-                            2215 John Daniel Drive
+                            SalTux
                             <br />
                             Clark, MO 65243
                         </p>
@@ -184,10 +184,10 @@
                     </div>
                     <!-- Footer About Text-->
                     <div class="col-lg-4">
-                        <h4 class="text-uppercase mb-4">About Freelancer</h4>
+                        <h4 class="text-uppercase mb-4">About Team</h4>
                         <p class="lead mb-0">
-                            Freelance is a free to use, MIT licensed Bootstrap theme created by
-                            <a href="http://startbootstrap.com">Start Bootstrap</a>
+                            Ha-eun, Myoung-geun, Byeong-hun, Min-seo
+                            <a href="http://startbootstrap.com">Feel Free to meet!</a>
                             .
                         </p>
                     </div>
@@ -196,7 +196,7 @@
         </footer>
         <!-- Copyright Section-->
         <div class="copyright py-4 text-center text-white">
-            <div class="container"><small>Copyright &copy; Your Website 2023</small></div>
+            <div class="container"><small>Copyright &copy; Saltux Website 2024</small></div>교육 프로그램
         </div>
         <!-- Portfolio Modals-->
         <!-- Portfolio Modal 1-->

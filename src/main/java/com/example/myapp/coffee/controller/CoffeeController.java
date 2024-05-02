@@ -30,6 +30,11 @@ public class CoffeeController {
 	@Autowired
 	ICoffeeService coffeeService;
 	
+	@GetMapping("/test")
+	public String test() {
+		return"coffee/test";
+	}
+	
 	/**
 	 * 커피 리스트 조회 화면
 	 * @return
@@ -39,6 +44,7 @@ public class CoffeeController {
 		List<Coffee> coffeeList = coffeeService.getCoffeeList();
 		int custId = (int)session.getAttribute("custId");
 		String role = (String)session.getAttribute("role");
+		
 		model.addAttribute("custId", custId);
 		model.addAttribute("role", role);
 		logger.info(">>>role" + role);
